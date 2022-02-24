@@ -45,8 +45,7 @@ namespace BusinessLogic.FileSystemVisitor
                     var node = new TreeNode
                     {
                         FileName = file.Name,
-                        DateTime = file.CreationTime,
-                        Directory = i
+                        DirectoryId = i
                     };
 
                     FilteredFileFoundEvent?.Invoke(this, node);
@@ -93,8 +92,7 @@ namespace BusinessLogic.FileSystemVisitor
                     var node = new TreeNode
                     {
                         FileName = file.Name,
-                        DateTime = file.CreationTime,
-                        Directory = i
+                        DirectoryId = i
                     };
 
                     FileFoundEvent?.Invoke(this, node);

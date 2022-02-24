@@ -12,8 +12,7 @@ namespace BusinessLogic.FileSystemVisitor
     }
     public struct TreeNode
     {
-        public int Directory { get; set; }
+        public int DirectoryId { get; set; }
         public string FileName { get; set; }
-        public DateTime DateTime { get; set; }
     }
 }

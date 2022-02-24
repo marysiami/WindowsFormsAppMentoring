@@ -23,7 +23,7 @@ namespace WindowsFormsAppMentoring
             ReaderService.DirectoryFoundEvent += ReaderService_DirectoryFoundEvent;
             ReaderService.FilteredFileFoundEvent += ReaderService_FilteredFileFoundEvent;
             ReaderService.FilteredDirectoryFoundEvent += ReaderService_FilteredDirectoryFoundEvent;
-        }
+        }        
 
         #region events
         private void ReaderService_FilteredDirectoryFoundEvent(object sender, string e)
@@ -33,17 +33,17 @@ namespace WindowsFormsAppMentoring
 
         private void ReaderService_FilteredFileFoundEvent(object sender, BusinessLogic.FileSystemVisitor.TreeNode e)
         {
-            resultTree.Nodes[e.Directory].Nodes.Add($"{e.FileName} {e.DateTime}");
+            resultTree.Nodes[e.DirectoryId].Nodes.Add(e.FileName);
         }
 
         private void ReaderService_DirectoryFoundEvent(object sender, string e)
-        {
-            resultTree.Nodes.Add(e);
+        { 
+           resultTree.Nodes.Add(e); 
         }
 
         private void ReaderService_FileFoundEvent(object sender, BusinessLogic.FileSystemVisitor.TreeNode e)
         {
-            resultTree.Nodes[e.Directory].Nodes.Add($"{e.FileName} {e.DateTime}");
+            resultTree.Nodes[e.DirectoryId].Nodes.Add(e.FileName);
         }
 
         private void Visitor_FinishedEvent(object sender, string e)
@@ -60,6 +60,15 @@ namespace WindowsFormsAppMentoring
             resultTree.BeginUpdate();
         }
         #endregion
+
+        private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var node = e.Node;
+            if (node != null && e.Clicks > 1)
+            {
+                resultTree.Nodes.Remove(node);
+            }
+        }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -105,7 +114,5 @@ namespace WindowsFormsAppMentoring
             }
             
         }
-
-      
     }
 }
